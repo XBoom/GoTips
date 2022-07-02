@@ -1,8 +1,11 @@
 package main
 
-import "gotips/tchan"
+import (
+	"fmt"
+	"gotips/app/mapreduce"
+)
 
 func main() {
-	ch := make(chan interface{}, 3)
-	tchan.Drain(ch)
+	v, err := mapreduce.Run([]int{1,2,0,3,4,5})
+	fmt.Printf("result %v, err %v", v, err)
 }
