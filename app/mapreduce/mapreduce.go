@@ -1,7 +1,6 @@
 package mapreduce
 
 import (
-	"errors"
 	"log"
 
 	"github.com/zeromicro/go-zero/core/mr"
@@ -36,10 +35,21 @@ func Run(uids []int) ([]int, error) {
 	return r.([]int), nil
 }
 
+func Run1(uids []int) ([]int,error){
+	res := make([]int, 0, len(uids))
+	for _, v := range uids {
+		ok, err := check(v)
+		if err != nil {
+			return nil, err
+		}
+		if ok {
+			res = append(res, v)
+		}
+	}
+	return res, nil
+}
+
 func check(uid int) (bool, error) {
 	// do something check user legal
-	if uid == 0 {
-		return false, errors.New("uid wrong")
-	}
 	return true, nil
 }
